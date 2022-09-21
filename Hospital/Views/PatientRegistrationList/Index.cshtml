@@ -1,0 +1,47 @@
+﻿@model List<Hospital.Data.Models.HastaKayit>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1><bold>Hasta Kayıtın aldığı randevular</bold></h1>
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Hasta Kayıt ID</th>
+            <th scope="col">Hasta TC</th>
+
+
+            <th scope="col">Hasta Adı</th>
+            <th scope="col">Hasta Soyadı</th>
+            <th scope="col">Şikayet</th>
+            <th scope="col">Bölüm</th>
+            <th scope="col">Doktor</th>
+        </tr>
+    </thead>
+
+    <tbody class="ellipsis">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.HastaKayitID</th>
+                <td>@item.HastaTc</td>
+                <td>@item.HastaAdi</td>
+                <td>@item.HastaSoyadi</td>
+                <td>@item.HastaSikayet</td>
+                <td>@item.Doktor.Bolum.bolumAdi</td>
+                <td>@item.Doktor.doktorAdi @item.Doktor.doktorSoyadi</td>
+
+                <td><a href="@Url.Action("RemovePatient", "PatientRegistrationList", new {hastaKayitID=item.HastaKayitID})"><button>Kayıt Sil</button></a></td>
+            </tr>
+        }
+
+
+
+    </tbody>
+
+</table>
+

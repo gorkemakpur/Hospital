@@ -1,0 +1,125 @@
+﻿@model Hospital.Data.Models.Hasta
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+
+
+
+<div class="container" id="container">
+    <div class="form-container sign-up-container">
+
+        <!--  <form action="#"> <h1>Hesap Oluştur</h1>
+                <input type="text" placeholder="Adınız" required />
+                <input type="text" placeholder="Soyadınız" required />
+                <input type="text" placeholder="TC Kimlik numaranız" required />
+                <input type="email" placeholder="Email" />
+                <input type="date" />
+                <input type="password" placeholder="Şifreniz" required />
+                <button>Kayıt Ol</button>
+    </form>-->
+            @using (Html.BeginForm("Register", "Login", FormMethod.Post))
+           {
+               <table cellpadding="0" cellspacing="0">
+                   <tr>
+                       <h1>Kayıt Ol</h1>
+                       <th colspan="1" align="center"></th>
+                   </tr>
+                   <tr>
+                       <td>Adınız: </td>
+                       <td>
+                           @Html.TextBoxFor(m => m.hastaAdi)
+                       </td>
+                   </tr>
+                   <tr>
+                       <td>Soyadınız: </td>
+                       <td>
+                           @Html.TextBoxFor(m => m.hastaSoyadi)
+
+                       </td>
+                   </tr>
+                   <tr>
+                       <td>TC Kimlik numaranız: </td>
+                       <td>
+                           @Html.TextBoxFor(m => m.hastaTC)
+                       </td>
+                   </tr>
+                   <tr>
+                       <td>Telefon Numaranız: </td>
+                       <td>
+                           @Html.TextBoxFor(m => m.hastaTelefonNumara)
+                       </td>
+                   </tr>
+                   <tr>
+                       <td>Email: </td>
+                       <td>
+                           @Html.TextBoxFor(m => m.hastaEmail)
+                       </td>
+                   </tr>
+                   <tr>
+                       <td>Şifre: </td>
+                       <td>
+                           @Html.PasswordFor(m => m.HastaPassword)
+                       </td>
+                   </tr>
+                   <tr>
+                       <td></td>
+                       <td><input type="submit" value="Kayıt Ol" /></td>
+                   </tr>
+               </table>
+
+
+           }
+ 
+
+
+
+    </div>
+    <div class="form-container sign-in-container">
+        @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+        {
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                    <h1>Giriş Yap</h1>
+                    <th colspan="1" align="center"></th>
+                </tr>
+               
+                <tr>
+                    <td>TC Kimlik numaranız: </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.hastaTC)
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>Şifre: </td>
+                    <td>
+                        @Html.PasswordFor(x => x.HastaPassword)
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Giriş Yap" /></td>
+                </tr>
+            </table>
+
+
+        }
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>Hesabınız var ise giriş yapın</h1>
+                <p>Giriş yapıp randevu almak için tıklayınız</p>
+                <button class="ghost" id="signIn">Giriş yap</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>Hesabınız yok ise kayıt olun</h1>
+                <p>Randevu sistemine erişmek için kayıt olun</p>
+                <button class="ghost" id="signUp">Kayıt ol</button>
+            </div>
+        </div>
+    </div>
+</div>

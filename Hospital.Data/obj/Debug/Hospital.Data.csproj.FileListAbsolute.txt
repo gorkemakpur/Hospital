@@ -1,0 +1,12 @@
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Data\bin\Debug\Hospital.Data.dll.config
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Data\bin\Debug\Hospital.Data.dll
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Data\bin\Debug\Hospital.Data.pdb
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Data\bin\Debug\EntityFramework.dll
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Data\bin\Debug\EntityFramework.SqlServer.dll
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Data\bin\Debug\EntityFramework.xml
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Data\obj\Debug\Hospital.Data.csproj.AssemblyReference.cache
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Data\obj\Debug\Hospital.Data.csproj.CoreCompileInputs.cache
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Data\obj\Debug\Hospital.Data.csproj.CopyComplete
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Data\obj\Debug\Hospital.Data.dll
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Data\obj\Debug\Hospital.Data.pdb

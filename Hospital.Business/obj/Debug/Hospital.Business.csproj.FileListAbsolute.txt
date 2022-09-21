@@ -1,0 +1,15 @@
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Business\bin\Debug\Hospital.Business.dll.config
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Business\bin\Debug\Hospital.Business.dll
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Business\bin\Debug\Hospital.Business.pdb
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Business\bin\Debug\EntityFramework.dll
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Business\bin\Debug\EntityFramework.SqlServer.dll
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Business\bin\Debug\Hospital.Data.dll
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Business\bin\Debug\Hospital.Data.pdb
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Business\bin\Debug\Hospital.Data.dll.config
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Business\bin\Debug\EntityFramework.xml
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Business\bin\Debug\EntityFramework.SqlServer.xml
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Business\obj\Debug\Hospital.Business.csproj.AssemblyReference.cache
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Business\obj\Debug\Hospital.Business.csproj.CoreCompileInputs.cache
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Business\obj\Debug\Hospital.Business.csproj.CopyComplete
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Business\obj\Debug\Hospital.Business.dll
+D:\.NET-project\.NET-Calismalar\Hospital\Hospital.Business\obj\Debug\Hospital.Business.pdb

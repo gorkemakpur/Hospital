@@ -1,0 +1,43 @@
+﻿@model List<Hospital.Data.Models.Tedavi>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--Hastanın giriş yaptığı durumda randevuları burada gözükecek-->
+
+<h1><bold>Giriş Yapan Hasta Randevular</bold></h1>
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Tedavi ID</th>
+            <th scope="col">Hasta Adı</th>
+            <th scope="col">TC Kimlik</th>
+            <th scope="col">Şikayet</th>
+           
+            <th scope="col">Doktor</th>
+        </tr>
+    </thead>
+
+    <tbody class="ellipsis">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.tedaviID</th>
+                <td>@item.Hasta.hastaAdi @item.Hasta.hastaSoyadi</td>
+                <td>@item.Hasta.hastaTC</td>
+                <td>@item.hastaSikayet</td>
+               
+                <td>@item.Doktor.doktorAdi @item.Doktor.doktorSoyadi</td>
+            </tr>
+        }
+
+
+
+    </tbody>
+
+</table>
+

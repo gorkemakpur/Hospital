@@ -1,0 +1,68 @@
+﻿@model Hospital.Data.Models.HastaKayit
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("RandevuEkle", "PatientRegistration", FormMethod.Post))
+{
+    <table cellpadding="0" cellspacing="0" style="font-size:20px;">
+        <tr>
+            <h1>Hasta Kayıt Sistemi</h1>
+            <th colspan="1" align="center"></th>
+        </tr>
+
+
+        <tr>
+            <td>Hasta TC: </td>
+            <td style="font-size:25px; padding:10px">
+                @Html.TextBoxFor(m => m.HastaTc)
+            </td>
+        </tr>
+        <tr>
+            <td>Hasta Adı: </td>
+            <td style="font-size: 25px; padding: 10px">
+                @Html.TextBoxFor(m => m.HastaAdi)
+            </td>
+        </tr>
+        <tr>
+            <td>Hasta Soyadı: </td>
+            <td style="font-size: 25px; padding: 10px">
+                @Html.TextBoxFor(m => m.HastaSoyadi)
+            </td>
+        </tr>
+
+        <tr>
+            <td>Hasta Şikayeti: </td>
+            <td style="font-size: 25px; padding: 10px">
+                @Html.TextAreaFor(m => m.HastaSikayet)
+            </td>
+        </tr>
+
+        <tr>
+            <td>Gideceği Bölüm</td>
+            <td style="font-size: 25px; padding: 10px">
+                @Html.DropDownListFor(y => y.bolumID, (List<SelectListItem>)ViewBag.d2, "Seçiniz")
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>Gideceği Doktor : </td>
+            <td style="font-size: 25px; padding: 10px">
+               
+                    @Html.DropDownListFor(x => x.doktorID, (List<SelectListItem>)ViewBag.d1, "Seçiniz")
+               
+
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td style="font-size: 35px; padding: 15px;"><input type="submit" value="Randevu Al" /></td>
+        </tr>
+    </table>
+
+
+}

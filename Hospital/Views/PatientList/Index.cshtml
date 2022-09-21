@@ -1,0 +1,44 @@
+﻿@model List<Hospital.Data.Models.Tedavi>
+@{
+    ViewBag.Title = "Index";
+}
+
+<!--Bütün randevular buradan gözükecek-->
+<h1 style="padding-bottom:30px"><bold>Giriş yapıp kayıt almış hastala randevuları</bold></h1>
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Tedavi ID</th>
+            <th scope="col">Hasta Adı</th>
+            <th scope="col">TC Kimlik</th>
+            <th scope="col">Şikayet</th>
+          
+            <th scope="col">Doktor</th>
+        </tr>
+    </thead>
+
+    <tbody class="ellipsis">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.tedaviID</th>
+                <td>@item.Hasta.hastaAdi @item.Hasta.hastaSoyadi</td>
+                <td>@item.Hasta.hastaTC</td>
+                <td>@item.hastaSikayet</td>
+               
+                <td>@item.Doktor.doktorAdi @item.Doktor.doktorSoyadi</td>
+                <td><a href="@Url.Action("RemovePatient", "PatientList", new {tedaviID=item.tedaviID})"><button>Kayıt Sil</button></a></td>
+
+            </tr>
+        }
+
+
+
+    </tbody>
+</table>
+
+
+

@@ -1,0 +1,107 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+
+                @if (Session["hasta"] != null && Session["role"].Equals(3))
+                {
+                    @Html.ActionLink("Hasta Kayıt", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
+
+
+
+                @if (Session["hasta"] != null && Session["role"].Equals(1))
+                {
+                    
+                        @Html.ActionLink("Hasta", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+                        }
+                    
+
+
+                </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Anasayfa", "Index", "Home")</li>
+
+
+                    @if (Session["hasta"] != null && Session["role"].Equals(3))
+                    {
+                        //veritabanında role kısmı hasta kayıt olan kişiler burada listelenecek
+
+                        <li>@Html.ActionLink("Hasta Kayıt", "Index", "PatientRegistration")</li>
+                        <li>@Html.ActionLink("Hasta Kayıt Listesi", "Index", "PatientRegistrationList")</li>
+                        <li>@Html.ActionLink("Randevu Listesi", "Index", "PatientList")</li>
+
+                        <li>@Html.ActionLink("Çıkış Yap", "LogOut", "Login")</li>
+
+
+                        <li style="margin-left:100px;margin-top:10px; text-align:center; font-size:15px; color:blue">@Session["hasta"].ToString()</li>
+
+                    }
+
+
+                    @if (Session["hasta"] != null && Session["role"].Equals(1))
+                    {
+
+
+                        //veritabanında role kısmı hasta olan kişiler
+                        <li>@Html.ActionLink("Randevu Alma", "Index", "Appointment")</li>
+                        //randevu alma kısmına gidecek
+                        <li>@Html.ActionLink("Randevularım", "Index", "AppointmentList")</li>
+                        //randevu alma kısmına gidecek
+
+                        <li>@Html.ActionLink("Çıkış Yap", "LogOut", "Login")</li>
+
+
+                        <li style="margin-left:100px;margin-top:10px; text-align:center; font-size:15px; color:blue">@Session["hasta"].ToString()</li>
+
+                    }
+                    else if (Session["hasta"] == null)
+                    {
+                        <li>@Html.ActionLink("Giriş Yap", "Index", "Login")</li>
+                    }
+
+
+
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+
+
+
+        <footer>
+            <p>&copy; @DateTime.Now.Year Aziz Görkem Akpur</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery")
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

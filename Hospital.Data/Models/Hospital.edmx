@@ -1,0 +1,547 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HospitalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bolum">
+          <Key>
+            <PropertyRef Name="bolumID" />
+          </Key>
+          <Property Name="bolumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bolumAdi" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Cinsiyet">
+          <Key>
+            <PropertyRef Name="CinsiyetID" />
+          </Key>
+          <Property Name="CinsiyetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cinsiyet" Type="varchar" MaxLength="29" />
+        </EntityType>
+        <EntityType Name="Doktor">
+          <Key>
+            <PropertyRef Name="doktorID" />
+          </Key>
+          <Property Name="doktorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="doktorAdi" Type="varchar" MaxLength="50" />
+          <Property Name="doktorSoyadi" Type="varchar" MaxLength="50" />
+          <Property Name="doktorTelefon" Type="varchar" MaxLength="11" />
+          <Property Name="doktorUzmanlikAlani" Type="varchar" MaxLength="50" />
+          <Property Name="bolumID" Type="int" />
+        </EntityType>
+        <EntityType Name="Hasta">
+          <Key>
+            <PropertyRef Name="hastaID" />
+          </Key>
+          <Property Name="hastaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hastaAdi" Type="varchar" MaxLength="50" />
+          <Property Name="hastaSoyadi" Type="varchar" MaxLength="50" />
+          <Property Name="hastaTelefonNumara" Type="varchar" MaxLength="11" />
+          <Property Name="hastaTC" Type="varchar" MaxLength="11" />
+          <Property Name="hastaEmail" Type="varchar" MaxLength="50" />
+          <Property Name="hastaDogumTarihi" Type="date" />
+          <Property Name="cinsiyetID" Type="int" />
+          <Property Name="HastaPassword" Type="varchar(max)" />
+          <Property Name="RoleID" Type="int" />
+        </EntityType>
+        <EntityType Name="HastaKayit">
+          <Key>
+            <PropertyRef Name="HastaKayitID" />
+          </Key>
+          <Property Name="HastaKayitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HastaAdi" Type="varchar" MaxLength="50" />
+          <Property Name="HastaSoyadi" Type="varchar" MaxLength="50" />
+          <Property Name="HastaTc" Type="varchar" MaxLength="50" />
+          <Property Name="HastaSikayet" Type="varchar(max)" />
+          <Property Name="bolumID" Type="int" />
+          <Property Name="doktorID" Type="int" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleNumber" Type="int" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" />
+          <Property Name="References1" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tedavi">
+          <Key>
+            <PropertyRef Name="tedaviID" />
+          </Key>
+          <Property Name="hastaID" Type="int" />
+          <Property Name="doktorID" Type="int" />
+          <Property Name="hastaSikayet" Type="varchar(max)" />
+          <Property Name="tedaviID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Doktor__bolumID__5AEE82B9">
+          <End Role="Bolum" Type="Self.Bolum" Multiplicity="0..1" />
+          <End Role="Doktor" Type="Self.Doktor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolum">
+              <PropertyRef Name="bolumID" />
+            </Principal>
+            <Dependent Role="Doktor">
+              <PropertyRef Name="bolumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Hasta__cinsiyetI__628FA481">
+          <End Role="Cinsiyet" Type="Self.Cinsiyet" Multiplicity="0..1" />
+          <End Role="Hasta" Type="Self.Hasta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cinsiyet">
+              <PropertyRef Name="CinsiyetID" />
+            </Principal>
+            <Dependent Role="Hasta">
+              <PropertyRef Name="cinsiyetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Hasta__RoleID__02FC7413">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Hasta" Type="Self.Hasta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Hasta">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HastaKayi__bolum__70DDC3D8">
+          <End Role="Bolum" Type="Self.Bolum" Multiplicity="0..1" />
+          <End Role="HastaKayit" Type="Self.HastaKayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolum">
+              <PropertyRef Name="bolumID" />
+            </Principal>
+            <Dependent Role="HastaKayit">
+              <PropertyRef Name="bolumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HastaKayi__dokto__6FE99F9F">
+          <End Role="Doktor" Type="Self.Doktor" Multiplicity="0..1" />
+          <End Role="HastaKayit" Type="Self.HastaKayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doktor">
+              <PropertyRef Name="doktorID" />
+            </Principal>
+            <Dependent Role="HastaKayit">
+              <PropertyRef Name="doktorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tedavi__doktorID__5FB337D6">
+          <End Role="Doktor" Type="Self.Doktor" Multiplicity="0..1" />
+          <End Role="Tedavi" Type="Self.Tedavi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doktor">
+              <PropertyRef Name="doktorID" />
+            </Principal>
+            <Dependent Role="Tedavi">
+              <PropertyRef Name="doktorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tedavi__hastaID__5EBF139D">
+          <End Role="Hasta" Type="Self.Hasta" Multiplicity="0..1" />
+          <End Role="Tedavi" Type="Self.Tedavi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hasta">
+              <PropertyRef Name="hastaID" />
+            </Principal>
+            <Dependent Role="Tedavi">
+              <PropertyRef Name="hastaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HospitalModelStoreContainer">
+          <EntitySet Name="Bolum" EntityType="Self.Bolum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cinsiyet" EntityType="Self.Cinsiyet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doktor" EntityType="Self.Doktor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hasta" EntityType="Self.Hasta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HastaKayit" EntityType="Self.HastaKayit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tedavi" EntityType="Self.Tedavi" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Doktor__bolumID__5AEE82B9" Association="Self.FK__Doktor__bolumID__5AEE82B9">
+            <End Role="Bolum" EntitySet="Bolum" />
+            <End Role="Doktor" EntitySet="Doktor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Hasta__cinsiyetI__628FA481" Association="Self.FK__Hasta__cinsiyetI__628FA481">
+            <End Role="Cinsiyet" EntitySet="Cinsiyet" />
+            <End Role="Hasta" EntitySet="Hasta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Hasta__RoleID__02FC7413" Association="Self.FK__Hasta__RoleID__02FC7413">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Hasta" EntitySet="Hasta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HastaKayi__bolum__70DDC3D8" Association="Self.FK__HastaKayi__bolum__70DDC3D8">
+            <End Role="Bolum" EntitySet="Bolum" />
+            <End Role="HastaKayit" EntitySet="HastaKayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HastaKayi__dokto__6FE99F9F" Association="Self.FK__HastaKayi__dokto__6FE99F9F">
+            <End Role="Doktor" EntitySet="Doktor" />
+            <End Role="HastaKayit" EntitySet="HastaKayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tedavi__doktorID__5FB337D6" Association="Self.FK__Tedavi__doktorID__5FB337D6">
+            <End Role="Doktor" EntitySet="Doktor" />
+            <End Role="Tedavi" EntitySet="Tedavi" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tedavi__hastaID__5EBF139D" Association="Self.FK__Tedavi__hastaID__5EBF139D">
+            <End Role="Hasta" EntitySet="Hasta" />
+            <End Role="Tedavi" EntitySet="Tedavi" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HospitalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bolum">
+          <Key>
+            <PropertyRef Name="bolumID" />
+          </Key>
+          <Property Name="bolumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bolumAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Doktor" Relationship="Self.FK__Doktor__bolumID__5AEE82B9" FromRole="Bolum" ToRole="Doktor" />
+          <NavigationProperty Name="HastaKayit" Relationship="HospitalModel.FK__HastaKayi__bolum__70DDC3D8" FromRole="Bolum" ToRole="HastaKayit" />
+        </EntityType>
+        <EntityType Name="Cinsiyet">
+          <Key>
+            <PropertyRef Name="CinsiyetID" />
+          </Key>
+          <Property Name="CinsiyetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cinsiyet1" Type="String" MaxLength="29" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Hasta" Relationship="Self.FK__Hasta__cinsiyetI__628FA481" FromRole="Cinsiyet" ToRole="Hasta" />
+        </EntityType>
+        <EntityType Name="Doktor">
+          <Key>
+            <PropertyRef Name="doktorID" />
+          </Key>
+          <Property Name="doktorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="doktorAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="doktorSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="doktorTelefon" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="doktorUzmanlikAlani" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="bolumID" Type="Int32" />
+          <NavigationProperty Name="Bolum" Relationship="Self.FK__Doktor__bolumID__5AEE82B9" FromRole="Doktor" ToRole="Bolum" />
+          <NavigationProperty Name="Tedavi" Relationship="Self.FK__Tedavi__doktorID__5FB337D6" FromRole="Doktor" ToRole="Tedavi" />
+          <NavigationProperty Name="HastaKayit" Relationship="HospitalModel.FK__HastaKayi__dokto__6FE99F9F" FromRole="Doktor" ToRole="HastaKayit" />
+        </EntityType>
+        <EntityType Name="Hasta">
+          <Key>
+            <PropertyRef Name="hastaID" />
+          </Key>
+          <Property Name="hastaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hastaAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="hastaSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="hastaTelefonNumara" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="hastaTC" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="hastaEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="hastaDogumTarihi" Type="DateTime" Precision="0" />
+          <Property Name="cinsiyetID" Type="Int32" />
+          <Property Name="HastaPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cinsiyet" Relationship="Self.FK__Hasta__cinsiyetI__628FA481" FromRole="Hasta" ToRole="Cinsiyet" />
+          <NavigationProperty Name="Tedavi" Relationship="Self.FK__Tedavi__hastaID__5EBF139D" FromRole="Hasta" ToRole="Tedavi" />
+          <Property Name="RoleID" Type="Int32" />
+          <NavigationProperty Name="Role" Relationship="HospitalModel.FK__Hasta__RoleID__02FC7413" FromRole="Hasta" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tedavi">
+          <Key>
+            <PropertyRef Name="tedaviID" />
+          </Key>
+          <Property Name="hastaID" Type="Int32" />
+          <Property Name="doktorID" Type="Int32" />
+          <Property Name="hastaSikayet" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="tedaviID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Doktor" Relationship="Self.FK__Tedavi__doktorID__5FB337D6" FromRole="Tedavi" ToRole="Doktor" />
+          <NavigationProperty Name="Hasta" Relationship="Self.FK__Tedavi__hastaID__5EBF139D" FromRole="Tedavi" ToRole="Hasta" />
+        </EntityType>
+        <Association Name="FK__Doktor__bolumID__5AEE82B9">
+          <End Role="Bolum" Type="Self.Bolum" Multiplicity="0..1" />
+          <End Role="Doktor" Type="Self.Doktor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolum">
+              <PropertyRef Name="bolumID" />
+            </Principal>
+            <Dependent Role="Doktor">
+              <PropertyRef Name="bolumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Hasta__cinsiyetI__628FA481">
+          <End Role="Cinsiyet" Type="Self.Cinsiyet" Multiplicity="0..1" />
+          <End Role="Hasta" Type="Self.Hasta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cinsiyet">
+              <PropertyRef Name="CinsiyetID" />
+            </Principal>
+            <Dependent Role="Hasta">
+              <PropertyRef Name="cinsiyetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tedavi__doktorID__5FB337D6">
+          <End Role="Doktor" Type="Self.Doktor" Multiplicity="0..1" />
+          <End Role="Tedavi" Type="Self.Tedavi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doktor">
+              <PropertyRef Name="doktorID" />
+            </Principal>
+            <Dependent Role="Tedavi">
+              <PropertyRef Name="doktorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tedavi__hastaID__5EBF139D">
+          <End Role="Hasta" Type="Self.Hasta" Multiplicity="0..1" />
+          <End Role="Tedavi" Type="Self.Tedavi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hasta">
+              <PropertyRef Name="hastaID" />
+            </Principal>
+            <Dependent Role="Tedavi">
+              <PropertyRef Name="hastaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HospitalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bolum" EntityType="Self.Bolum" />
+          <EntitySet Name="Cinsiyet" EntityType="Self.Cinsiyet" />
+          <EntitySet Name="Doktor" EntityType="Self.Doktor" />
+          <EntitySet Name="Hasta" EntityType="Self.Hasta" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tedavi" EntityType="Self.Tedavi" />
+          <AssociationSet Name="FK__Doktor__bolumID__5AEE82B9" Association="Self.FK__Doktor__bolumID__5AEE82B9">
+            <End Role="Bolum" EntitySet="Bolum" />
+            <End Role="Doktor" EntitySet="Doktor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Hasta__cinsiyetI__628FA481" Association="Self.FK__Hasta__cinsiyetI__628FA481">
+            <End Role="Cinsiyet" EntitySet="Cinsiyet" />
+            <End Role="Hasta" EntitySet="Hasta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tedavi__doktorID__5FB337D6" Association="Self.FK__Tedavi__doktorID__5FB337D6">
+            <End Role="Doktor" EntitySet="Doktor" />
+            <End Role="Tedavi" EntitySet="Tedavi" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tedavi__hastaID__5EBF139D" Association="Self.FK__Tedavi__hastaID__5EBF139D">
+            <End Role="Hasta" EntitySet="Hasta" />
+            <End Role="Tedavi" EntitySet="Tedavi" />
+          </AssociationSet>
+          <EntitySet Name="HastaKayit" EntityType="HospitalModel.HastaKayit" />
+          <AssociationSet Name="FK__HastaKayi__bolum__70DDC3D8" Association="HospitalModel.FK__HastaKayi__bolum__70DDC3D8">
+            <End Role="Bolum" EntitySet="Bolum" />
+            <End Role="HastaKayit" EntitySet="HastaKayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HastaKayi__dokto__6FE99F9F" Association="HospitalModel.FK__HastaKayi__dokto__6FE99F9F">
+            <End Role="Doktor" EntitySet="Doktor" />
+            <End Role="HastaKayit" EntitySet="HastaKayit" />
+          </AssociationSet>
+          <EntitySet Name="Role" EntityType="HospitalModel.Role" />
+          <AssociationSet Name="FK__Hasta__RoleID__02FC7413" Association="HospitalModel.FK__Hasta__RoleID__02FC7413">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Hasta" EntitySet="Hasta" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="HastaKayit">
+          <Key>
+            <PropertyRef Name="HastaKayitID" />
+          </Key>
+          <Property Name="HastaKayitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HastaAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HastaSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HastaTc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HastaSikayet" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="bolumID" Type="Int32" />
+          <Property Name="doktorID" Type="Int32" />
+          <NavigationProperty Name="Bolum" Relationship="HospitalModel.FK__HastaKayi__bolum__70DDC3D8" FromRole="HastaKayit" ToRole="Bolum" />
+          <NavigationProperty Name="Doktor" Relationship="HospitalModel.FK__HastaKayi__dokto__6FE99F9F" FromRole="HastaKayit" ToRole="Doktor" />
+        </EntityType>
+        <Association Name="FK__HastaKayi__bolum__70DDC3D8">
+          <End Type="HospitalModel.Bolum" Role="Bolum" Multiplicity="0..1" />
+          <End Type="HospitalModel.HastaKayit" Role="HastaKayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolum">
+              <PropertyRef Name="bolumID" />
+            </Principal>
+            <Dependent Role="HastaKayit">
+              <PropertyRef Name="bolumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HastaKayi__dokto__6FE99F9F">
+          <End Type="HospitalModel.Doktor" Role="Doktor" Multiplicity="0..1" />
+          <End Type="HospitalModel.HastaKayit" Role="HastaKayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doktor">
+              <PropertyRef Name="doktorID" />
+            </Principal>
+            <Dependent Role="HastaKayit">
+              <PropertyRef Name="doktorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleNumber" Type="Int32" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="References1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Hasta" Relationship="HospitalModel.FK__Hasta__RoleID__02FC7413" FromRole="Role" ToRole="Hasta" />
+        </EntityType>
+        <Association Name="FK__Hasta__RoleID__02FC7413">
+          <End Type="HospitalModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="HospitalModel.Hasta" Role="Hasta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Hasta">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HospitalModelStoreContainer" CdmEntityContainer="HospitalEntities">
+          <EntitySetMapping Name="Bolum">
+            <EntityTypeMapping TypeName="HospitalModel.Bolum">
+              <MappingFragment StoreEntitySet="Bolum">
+                <ScalarProperty Name="bolumID" ColumnName="bolumID" />
+                <ScalarProperty Name="bolumAdi" ColumnName="bolumAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cinsiyet">
+            <EntityTypeMapping TypeName="HospitalModel.Cinsiyet">
+              <MappingFragment StoreEntitySet="Cinsiyet">
+                <ScalarProperty Name="CinsiyetID" ColumnName="CinsiyetID" />
+                <ScalarProperty Name="Cinsiyet1" ColumnName="Cinsiyet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doktor">
+            <EntityTypeMapping TypeName="HospitalModel.Doktor">
+              <MappingFragment StoreEntitySet="Doktor">
+                <ScalarProperty Name="doktorID" ColumnName="doktorID" />
+                <ScalarProperty Name="doktorAdi" ColumnName="doktorAdi" />
+                <ScalarProperty Name="doktorSoyadi" ColumnName="doktorSoyadi" />
+                <ScalarProperty Name="doktorTelefon" ColumnName="doktorTelefon" />
+                <ScalarProperty Name="doktorUzmanlikAlani" ColumnName="doktorUzmanlikAlani" />
+                <ScalarProperty Name="bolumID" ColumnName="bolumID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hasta">
+            <EntityTypeMapping TypeName="HospitalModel.Hasta">
+              <MappingFragment StoreEntitySet="Hasta">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="hastaID" ColumnName="hastaID" />
+                <ScalarProperty Name="hastaAdi" ColumnName="hastaAdi" />
+                <ScalarProperty Name="hastaSoyadi" ColumnName="hastaSoyadi" />
+                <ScalarProperty Name="hastaTelefonNumara" ColumnName="hastaTelefonNumara" />
+                <ScalarProperty Name="hastaTC" ColumnName="hastaTC" />
+                <ScalarProperty Name="hastaEmail" ColumnName="hastaEmail" />
+                <ScalarProperty Name="hastaDogumTarihi" ColumnName="hastaDogumTarihi" />
+                <ScalarProperty Name="cinsiyetID" ColumnName="cinsiyetID" />
+                <ScalarProperty Name="HastaPassword" ColumnName="HastaPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="HospitalModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tedavi">
+            <EntityTypeMapping TypeName="HospitalModel.Tedavi">
+              <MappingFragment StoreEntitySet="Tedavi">
+                <ScalarProperty Name="hastaID" ColumnName="hastaID" />
+                <ScalarProperty Name="doktorID" ColumnName="doktorID" />
+                <ScalarProperty Name="hastaSikayet" ColumnName="hastaSikayet" />
+                <ScalarProperty Name="tedaviID" ColumnName="tedaviID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HastaKayit">
+            <EntityTypeMapping TypeName="HospitalModel.HastaKayit">
+              <MappingFragment StoreEntitySet="HastaKayit">
+                <ScalarProperty Name="doktorID" ColumnName="doktorID" />
+                <ScalarProperty Name="bolumID" ColumnName="bolumID" />
+                <ScalarProperty Name="HastaSikayet" ColumnName="HastaSikayet" />
+                <ScalarProperty Name="HastaTc" ColumnName="HastaTc" />
+                <ScalarProperty Name="HastaSoyadi" ColumnName="HastaSoyadi" />
+                <ScalarProperty Name="HastaAdi" ColumnName="HastaAdi" />
+                <ScalarProperty Name="HastaKayitID" ColumnName="HastaKayitID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="HospitalModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="References1" ColumnName="References1" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleNumber" ColumnName="RoleNumber" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
